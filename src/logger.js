@@ -9,8 +9,25 @@
 const logger = ( req, res, next ) => {
     
     console.log(`${req.method} ${req.originalUrl}`);
+    
+    console.log(`\nHeaders:`);
+    printAllProps( req.headers );
+
+    if ( Object.keys( req.params ).length > 0 ) {
+        console.log(`\nParams:`);
+        printAllProps( req.params );
+    }
+
+    console.log(`\n\n`);
 
     next();
+}
+
+// log all key => value pairs of an object tabbed one space in
+const printAllProps = function( object ){
+    Object.keys( object ).forEach( key => {
+        console.log(`\t${key}: ${object[key]}`);
+    });
 }
 
 module.exports = logger;
