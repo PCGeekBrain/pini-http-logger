@@ -7,8 +7,10 @@
  */
 
 const logger = ( req, res, next ) => {
+
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     
-    console.log(`${req.method} ${req.originalUrl}`);
+    console.log(`${ip}: ${req.method} ${req.originalUrl}`);
     
     console.log(`\nHeaders:`);
     printAllProps( req.headers );
